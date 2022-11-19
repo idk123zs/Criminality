@@ -50,7 +50,7 @@ end
 if game:GetService("Players").LocalPlayer.Name == AccountWithBounty then
 	if game.PlaceId == 4588604953 then
 		while wait() do
-			local ServerCode = "8f528a" -- Code of the server to join
+			local ServerCode = "b152cc" -- Code of the server to join
 
 			local ServerInfo = {
 				[1] = "connect",
