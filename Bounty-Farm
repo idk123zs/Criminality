@@ -1,0 +1,95 @@
+-- Bounty Farm (Improved)
+
+repeat wait() until game:IsLoaded()
+
+queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
+local AccountClaimingBounty = "Goldner91791"
+local AccountWithBounty = "Lindgren1708"
+
+-- Account Claiming Bounty
+
+if game:GetService("Players").LocalPlayer.Name == AccountClaimingBounty then
+	if game.PlaceId == 8343259840 then
+		getgenv().FarmEnabled = false
+		game:GetService("StarterGui"):SetCore("SendNotification", {Title = "Criminality Bounty Farm", Text = "Spawn in, then press right alt to toggle the farm.", Duration = 5})
+		
+		game:GetService("UserInputService").InputBegan:Connect(function(Input)
+			if Input.KeyCode == Enum.KeyCode.RightAlt then
+				if getgenv().FarmEnabled == false then
+					getgenv().FarmEnabled = true
+				else
+					getgenv().FarmEnabled = false
+				end
+			end
+		end)
+		
+		spawn(function()
+			while task.wait() do
+				if getgenv().FarmEnabled == true then
+					game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-4144, 103, 279)
+					
+					if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Fists") then
+						game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Fists").Parent = game:GetService("Players").LocalPlayer.Character
+					end
+					
+					if game:GetService("Players"):FindFirstChild(AccountWithBounty) then
+						if (game:GetService("Players"):FindFirstChild(AccountWithBounty).Character:FindFirstChildOfClass("Part").Position - game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Part").Position).Magnitude < 20 then
+							if not game:GetService("Players"):FindFirstChild(AccountWithBounty).Character:FindFirstChildOfClass("ForceField") then
+								game:GetService("Players").LocalPlayer.Character:FindFirstChild("Fists"):Activate()
+							end
+						end
+					end
+				end
+			end
+		end)
+	end
+end
+
+-- Account With Bounty
+
+if game:GetService("Players").LocalPlayer.Name == AccountWithBounty then
+	if game.PlaceId == 4588604953 then
+		while wait() do
+			local ServerCode = "8f528a" -- Code of the server to join
+
+			local ServerInfo = {
+				[1] = "connect",
+				[2] = "Casual",
+				[3] = ServerCode,
+				[4] = 2
+			}
+
+			game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Play"):InvokeServer(unpack(ServerInfo))
+		end
+	end
+
+	if game.PlaceId == 8343259840 then
+		local args = {
+			[1] = "",
+			[2] = "\15daz\18tough\19"
+		}
+
+		game:GetService("ReplicatedStorage").Events.BRBRBRRBLOOOL:InvokeServer(unpack(args))
+		
+		wait(1)
+		
+		repeat wait() until game:GetService("Players").LocalPlayer.Character:FindFirstChild("Humanoid") and game:GetService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+		
+		spawn(function()
+			while task.wait() do
+				game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-4144, 103, 275)
+				if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Humanoid").Health < game:GetService("Players").LocalPlayer.Character:FindFirstChild("Humanoid").MaxHealth then
+					game:GetService("ReplicatedStorage").Events.RCTNMEUN:InvokeServer()
+				end
+			end
+		end)
+	end
+  
+  game:GetService("Players").LocalPlayer.OnTeleport:Connect(function(State)
+	if State == Enum.TeleportState.Started then
+		if queueteleport then
+			queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()")
+		end
+	end
+end)
+end
